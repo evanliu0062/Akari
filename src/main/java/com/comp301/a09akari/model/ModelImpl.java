@@ -20,9 +20,7 @@ public class ModelImpl implements Model {
     this.library = library;
     this.lampList = new ArrayList<>();
     this.observers = new ArrayList<>();
-    this.lampBoard =
-        new int[library.getPuzzle(activePuzzleIndex).getWidth()]
-            [library.getPuzzle(activePuzzleIndex).getHeight()];
+    // this.lampBoard =
   }
 
   @Override
@@ -87,6 +85,7 @@ public class ModelImpl implements Model {
         || r >= library.getPuzzle(getActivePuzzleIndex()).getHeight()) {
       throw new IndexOutOfBoundsException();
     }
+
     return false;
   }
 

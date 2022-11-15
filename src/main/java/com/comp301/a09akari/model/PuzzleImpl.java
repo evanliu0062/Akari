@@ -3,7 +3,7 @@ package com.comp301.a09akari.model;
 import static com.comp301.a09akari.model.CellType.*;
 
 public class PuzzleImpl implements Puzzle {
-  private int[][] board;
+  protected int[][] board;
 
   public PuzzleImpl(int[][] board) {
     this.board = board;
