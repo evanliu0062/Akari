@@ -20,7 +20,9 @@ public class ModelImpl implements Model {
     this.library = library;
     this.lampList = new ArrayList<>();
     this.observers = new ArrayList<>();
-    this.lampBoard = library.getPuzzle(activePuzzleIndex).getBoard();
+    this.lampBoard =
+        new int[library.getPuzzle(activePuzzleIndex).getWidth()]
+            [library.getPuzzle(activePuzzleIndex).getHeight()];
   }
 
   @Override
