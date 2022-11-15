@@ -6,6 +6,7 @@ import java.util.List;
 
 public class ModelImpl implements Model {
   private PuzzleLibrary library;
+  private List<Integer> lampList;
   private int activePuzzleIndex;
   private List<ModelObserver> observers;
   // lampBoard contains: 0 = Not Lamp, 1 = Lamp
@@ -17,6 +18,7 @@ public class ModelImpl implements Model {
     }
 
     this.library = library;
+    this.lampList = new ArrayList<>();
     this.observers = new ArrayList<>();
   }
 
@@ -110,7 +112,13 @@ public class ModelImpl implements Model {
   }
 
   @Override
-  public void resetPuzzle() {}
+  public void resetPuzzle() {
+    for (int x = 0; x < lampBoard.length; x++) {
+      for (int y = 0; y < lampBoard[0].length; y++) {
+        lampBoard[x][y] = 0;
+      }
+    }
+  }
 
   @Override
   public boolean isSolved() {
@@ -150,5 +158,11 @@ public class ModelImpl implements Model {
   @Override
   public void removeObserver(ModelObserver observer) {
     observers.remove(observer);
+  }
+
+  public void notifyObserver() {
+    for (ModelObserver o : observers) {
+      o.update(this);
+    }
   }
 }
