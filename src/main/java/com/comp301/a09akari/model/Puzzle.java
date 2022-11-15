@@ -19,6 +19,4 @@ public interface Puzzle {
    * cell is not type CLUE
    */
   int getClue(int r, int c);
-
-  int[][] getBoard();
 }
