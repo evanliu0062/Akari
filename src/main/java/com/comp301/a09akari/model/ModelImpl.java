@@ -7,7 +7,6 @@ import java.util.List;
 public class ModelImpl implements Model {
   private PuzzleLibrary library;
   private int activePuzzleIndex;
-  private Puzzle activePuzzle;
   private List<ModelObserver> observers;
   // lampBoard contains: 0 = Not Lamp, 1 = Lamp
   private int[][] lampBoard;
@@ -18,8 +17,6 @@ public class ModelImpl implements Model {
     }
 
     this.library = library;
-    this.activePuzzleIndex = 0;
-    this.activePuzzle = library.getPuzzle(activePuzzleIndex);
     this.observers = new ArrayList<>();
   }
 
@@ -90,7 +87,7 @@ public class ModelImpl implements Model {
 
   @Override
   public Puzzle getActivePuzzle() {
-    return activePuzzle;
+    return library.getPuzzle(activePuzzleIndex);
   }
 
   @Override
@@ -100,7 +97,11 @@ public class ModelImpl implements Model {
 
   @Override
   public void setActivePuzzleIndex(int index) {
-    activePuzzleIndex = index;
+    if (index < 0 || index >= library.size()) {
+      throw new IllegalArgumentException();
+    } else {
+      activePuzzleIndex = index;
+    }
   }
 
   @Override
