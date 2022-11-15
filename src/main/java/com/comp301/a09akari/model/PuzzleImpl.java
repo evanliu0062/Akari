@@ -53,4 +53,8 @@ public class PuzzleImpl implements Puzzle {
       throw new IllegalArgumentException();
     }
   }
+
+  public int[][] getBoard() {
+    return board;
+  }
 }
