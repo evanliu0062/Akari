@@ -20,7 +20,6 @@ public class ModelImpl implements Model {
     this.library = library;
     this.lampList = new ArrayList<>();
     this.observers = new ArrayList<>();
-    // this.lampBoard =
   }
 
   @Override
@@ -45,11 +44,46 @@ public class ModelImpl implements Model {
 
   @Override
   public boolean isLit(int r, int c) {
-    if (r < 0
-        || c < 0
-        || c >= library.getPuzzle(getActivePuzzleIndex()).getWidth()
-        || r >= library.getPuzzle(getActivePuzzleIndex()).getHeight()) {
-      throw new IndexOutOfBoundsException();
+    if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
+      throw new IllegalArgumentException();
+    } else {
+      if (lampBoard[r][c] == 1) {
+        return true;
+      }
+
+      for (int x = r; x < lampBoard.length; x++) {
+        if (library.getPuzzle(activePuzzleIndex).getCellType(x, c) != CellType.CORRIDOR) {
+          break;
+        }
+        if (lampBoard[x][c] == 1) {
+          return true;
+        }
+      }
+      for (int x = r; x >= 0; x--) {
+        if (library.getPuzzle(activePuzzleIndex).getCellType(x, c) != CellType.CORRIDOR) {
+          break;
+        }
+        if (lampBoard[x][c] == 1) {
+          return true;
+        }
+      }
+
+      for (int y = c; y < lampBoard.length; y++) {
+        if (library.getPuzzle(activePuzzleIndex).getCellType(r, y) != CellType.CORRIDOR) {
+          break;
+        }
+        if (lampBoard[r][y] == 1) {
+          return true;
+        }
+      }
+      for (int y = c; y >= 0; y--) {
+        if (library.getPuzzle(activePuzzleIndex).getCellType(r, y) != CellType.CORRIDOR) {
+          break;
+        }
+        if (lampBoard[r][y] == 1) {
+          return true;
+        }
+      }
     }
     return false;
   }
