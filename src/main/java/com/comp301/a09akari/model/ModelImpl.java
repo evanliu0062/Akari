@@ -56,10 +56,7 @@ public class ModelImpl implements Model {
 
   @Override
   public boolean isLamp(int r, int c) {
-    if (r < 0
-        || c < 0
-        || c >= library.getPuzzle(getActivePuzzleIndex()).getWidth()
-        || r >= library.getPuzzle(getActivePuzzleIndex()).getHeight()) {
+    if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
       throw new IndexOutOfBoundsException();
     }
     return lampBoard[r][c] == 1;
@@ -67,14 +64,11 @@ public class ModelImpl implements Model {
 
   @Override
   public boolean isLampIllegal(int r, int c) {
-    if (r < 0
-        || c < 0
-        || c >= library.getPuzzle(getActivePuzzleIndex()).getWidth()
-        || r >= library.getPuzzle(getActivePuzzleIndex()).getHeight()) {
-      throw new IndexOutOfBoundsException();
+    if (isLit(r, c)) {
+      return false;
+    } else {
+      return true;
     }
-
-    return false;
   }
 
   @Override
