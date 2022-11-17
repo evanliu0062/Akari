@@ -100,7 +100,9 @@ public class ModelImpl implements Model {
   public void resetPuzzle() {
     for (int x = 0; x < lampBoard.length; x++) {
       for (int y = 0; y < lampBoard[0].length; y++) {
-        lampBoard[x][y] = 0;
+        if (lampBoard[x][y] == 1) {
+          lampBoard[x][y] = 0;
+        }
       }
     }
     notifyObserver();
@@ -113,12 +115,6 @@ public class ModelImpl implements Model {
 
   @Override
   public boolean isClueSatisfied(int r, int c) {
-    if (r < 0
-        || c < 0
-        || c >= library.getPuzzle(activePuzzleIndex).getWidth()
-        || r >= library.getPuzzle(activePuzzleIndex).getHeight()) {
-      throw new IndexOutOfBoundsException();
-    }
     int clue = library.getPuzzle(activePuzzleIndex).getClue(r, c);
     int count = 0;
     if (isLamp(r + 1, c)) {
