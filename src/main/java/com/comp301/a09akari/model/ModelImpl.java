@@ -25,34 +25,22 @@ public class ModelImpl implements Model {
 
   @Override
   public void addLamp(int r, int c) {
-    if (r < 0
-        || c < 0
-        || c >= library.getPuzzle(getActivePuzzleIndex()).getWidth()
-        || r >= library.getPuzzle(getActivePuzzleIndex()).getHeight()) {
+    if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
       throw new IndexOutOfBoundsException();
-    }
-    if (library.getPuzzle(getActivePuzzleIndex()).getCellType(r, c) == CellType.CORRIDOR) {
-      throw new IllegalArgumentException();
-    }
-    if (!isLit(r, c)) {
+    } else {
       lampBoard[r][c] = 1;
     }
+    notifyObserver();
   }
 
   @Override
   public void removeLamp(int r, int c) {
-    if (r < 0
-        || c < 0
-        || c >= library.getPuzzle(getActivePuzzleIndex()).getWidth()
-        || r >= library.getPuzzle(getActivePuzzleIndex()).getHeight()) {
+    if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
       throw new IndexOutOfBoundsException();
-    }
-    if (library.getPuzzle(getActivePuzzleIndex()).getCellType(r, c) == CellType.CORRIDOR) {
-      throw new IllegalArgumentException();
-    }
-    if (isLamp(r, c)) {
+    } else {
       lampBoard[r][c] = 0;
     }
+    notifyObserver();
   }
 
   @Override
