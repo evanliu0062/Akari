@@ -56,7 +56,57 @@ public class ModelImpl implements Model {
     if (r < 0 || c < 0 || c >= activePuzzle.getWidth() || r >= activePuzzle.getHeight()) {
       throw new IndexOutOfBoundsException();
     }
+    if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
+      throw new IllegalArgumentException();
+    }
+    if (isLamp(r, c)) {
+      return true;
+    }
 
+    boolean right = false;
+    boolean left = false;
+    boolean down = false;
+    boolean up = false;
+
+    for (int y = r; y < activePuzzle.getHeight(); y++) {
+      if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
+        down = false;
+        break;
+      } else if (isLamp(y, c)) {
+        down = true;
+        break;
+      }
+    }
+    for (int y = r; y >= 0; y--) {
+      if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
+        up = false;
+        break;
+      } else if (isLamp(y, c)) {
+        up = true;
+        break;
+      }
+    }
+
+    for (int x = c; x < activePuzzle.getWidth(); x++) {
+      if (activePuzzle.getCellType(r, x) != CellType.CORRIDOR) {
+        right = false;
+        break;
+      } else if (isLamp(r, x)) {
+        right = true;
+        break;
+      }
+    }
+    for (int x = c; x >= 0; x--) {
+      if (activePuzzle.getCellType(r, x) != CellType.CORRIDOR) {
+        left = false;
+        break;
+      } else if (isLamp(r, x)) {
+        left = true;
+        break;
+      }
+    }
+
+    return right || left || up || down;
     /*if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) == CellType.CORRIDOR) {
       if (lampBoard[r][c] == 1) {
         return true;
@@ -99,7 +149,6 @@ public class ModelImpl implements Model {
       throw new IllegalArgumentException();
     }
     return false;*/
-    return false;
   }
 
   @Override
