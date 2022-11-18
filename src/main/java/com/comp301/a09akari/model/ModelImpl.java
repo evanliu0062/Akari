@@ -229,6 +229,13 @@ public class ModelImpl implements Model {
 
   @Override
   public boolean isSolved() {
+    for (int x = 0; x < activePuzzle.getWidth(); x++) {
+      for (int y = 0; y < activePuzzle.getHeight(); y++) {
+        if (activePuzzle.getCellType(x, y) == CellType.CORRIDOR) {
+          if (isLit(x, y)) {}
+        }
+      }
+    }
     return false;
   }
 
@@ -257,11 +264,17 @@ public class ModelImpl implements Model {
 
   @Override
   public void addObserver(ModelObserver observer) {
+    if (observer == null) {
+      throw new IllegalArgumentException();
+    }
     observers.add(observer);
   }
 
   @Override
   public void removeObserver(ModelObserver observer) {
+    if (observer == null) {
+      throw new IllegalArgumentException();
+    }
     observers.remove(observer);
   }
 
