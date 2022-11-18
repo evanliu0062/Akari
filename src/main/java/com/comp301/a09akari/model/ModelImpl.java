@@ -232,8 +232,11 @@ public class ModelImpl implements Model {
     for (int x = 0; x < activePuzzle.getWidth(); x++) {
       for (int y = 0; y < activePuzzle.getHeight(); y++) {
         if (activePuzzle.getCellType(x, y) == CellType.CORRIDOR) {
-          if (!isLamp(x, y)) {
-            if (!isLit(x, y)) {
+          if (!isLit(x, y)) {
+            return false;
+          }
+          if (isLamp(x, y)) {
+            if (isLampIllegal(x, y)) {
               return false;
             }
           }
@@ -242,9 +245,6 @@ public class ModelImpl implements Model {
           if (!isClueSatisfied(x, y)) {
             return false;
           }
-        }
-        if (isLampIllegal(x, y)) {
-          return false;
         }
       }
     }
