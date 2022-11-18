@@ -257,17 +257,25 @@ public class ModelImpl implements Model {
 
     int clue = library.getPuzzle(activePuzzleIndex).getClue(r, c);
     int count = 0;
-    if (isLamp(r + 1, c) && (r + 1) < activePuzzle.getHeight()) {
-      count++;
+    if ((r + 1) < activePuzzle.getHeight()) {
+      if (isLamp(r + 1, c)) {
+        count++;
+      }
     }
-    if (isLamp(r - 1, c) && (r - 1) >= 0) {
-      count++;
+    if ((r - 1) >= 0) {
+      if (isLamp(r - 1, c)) {
+        count++;
+      }
     }
-    if (isLamp(r, c + 1) && (c + 1) < activePuzzle.getWidth()) {
-      count++;
+    if ((c + 1) < activePuzzle.getWidth()) {
+      if (isLamp(r, c + 1)) {
+        count++;
+      }
     }
-    if (isLamp(r, c - 1) && (c - 1) >= 0) {
-      count++;
+    if ((c - 1) >= 0) {
+      if (isLamp(r, c - 1)) {
+        count++;
+      }
     }
     return clue == count;
   }
