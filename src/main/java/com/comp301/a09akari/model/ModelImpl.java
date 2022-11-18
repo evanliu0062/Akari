@@ -25,8 +25,12 @@ public class ModelImpl implements Model {
 
   @Override
   public void addLamp(int r, int c) {
-    if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
+    if (r < 0 || c < 0 || c >= activePuzzle.getWidth() || r >= activePuzzle.getHeight()) {
       throw new IndexOutOfBoundsException();
+    }
+
+    if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
+      throw new IllegalArgumentException();
     } else {
       lampBoard[r][c] = 1;
     }
@@ -35,8 +39,12 @@ public class ModelImpl implements Model {
 
   @Override
   public void removeLamp(int r, int c) {
-    if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
+    if (r < 0 || c < 0 || c >= activePuzzle.getWidth() || r >= activePuzzle.getHeight()) {
       throw new IndexOutOfBoundsException();
+    }
+
+    if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
+      throw new IllegalArgumentException();
     } else {
       lampBoard[r][c] = 0;
     }
@@ -45,6 +53,10 @@ public class ModelImpl implements Model {
 
   @Override
   public boolean isLit(int r, int c) {
+    if (r < 0 || c < 0 || c >= activePuzzle.getWidth() || r >= activePuzzle.getHeight()) {
+      throw new IndexOutOfBoundsException();
+    }
+
     if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
       throw new IllegalArgumentException();
     } else {
@@ -91,14 +103,25 @@ public class ModelImpl implements Model {
 
   @Override
   public boolean isLamp(int r, int c) {
-    if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
+    if (r < 0 || c < 0 || c >= activePuzzle.getWidth() || r >= activePuzzle.getHeight()) {
       throw new IndexOutOfBoundsException();
+    }
+
+    if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
+      throw new IllegalArgumentException();
     }
     return lampBoard[r][c] == 1;
   }
 
   @Override
   public boolean isLampIllegal(int r, int c) {
+    if (r < 0 || c < 0 || c >= activePuzzle.getWidth() || r >= activePuzzle.getHeight()) {
+      throw new IndexOutOfBoundsException();
+    }
+    if (!isLamp(r, c)) {
+      throw new IllegalArgumentException();
+    }
+
     if (isLit(r, c)) {
       return false;
     } else {
@@ -119,7 +142,7 @@ public class ModelImpl implements Model {
   @Override
   public void setActivePuzzleIndex(int index) {
     if (index < 0 || index >= library.size()) {
-      throw new IllegalArgumentException();
+      throw new IndexOutOfBoundsException();
     } else {
       activePuzzleIndex = index;
     }
@@ -150,6 +173,10 @@ public class ModelImpl implements Model {
 
   @Override
   public boolean isClueSatisfied(int r, int c) {
+    if (r < 0 || c < 0 || c >= activePuzzle.getWidth() || r >= activePuzzle.getHeight()) {
+      throw new IndexOutOfBoundsException();
+    }
+
     int clue = library.getPuzzle(activePuzzleIndex).getClue(r, c);
     int count = 0;
     if (isLamp(r + 1, c)) {
