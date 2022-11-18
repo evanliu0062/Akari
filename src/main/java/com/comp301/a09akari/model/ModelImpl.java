@@ -243,7 +243,9 @@ public class ModelImpl implements Model {
             return false;
           }
         }
-        if (isLampIllegal(x, y)) {}
+        if (isLampIllegal(x, y)) {
+          return false;
+        }
       }
     }
     return true;
