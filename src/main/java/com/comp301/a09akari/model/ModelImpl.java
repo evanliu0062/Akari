@@ -62,7 +62,7 @@ public class ModelImpl implements Model {
         return true;
       }
 
-      for (int x = r; x < lampBoard.length - 1; x++) {
+      for (int x = r; x < lampBoard.length; x++) {
         if (library.getPuzzle(activePuzzleIndex).getCellType(x, c) != CellType.CORRIDOR) {
           break;
         }
@@ -79,7 +79,7 @@ public class ModelImpl implements Model {
         }
       }
 
-      for (int y = c; y < lampBoard.length - 1; y++) {
+      for (int y = c; y < lampBoard.length; y++) {
         if (library.getPuzzle(activePuzzleIndex).getCellType(r, y) != CellType.CORRIDOR) {
           break;
         }
@@ -122,7 +122,51 @@ public class ModelImpl implements Model {
       throw new IllegalArgumentException();
     }
 
-    if (!isLamp(r, c)) {
+    boolean down = false;
+    boolean up = false;
+    boolean right = false;
+    boolean left = false;
+
+    for (int y = r + 1; y < activePuzzle.getHeight(); y++) {
+      if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
+        down = false;
+        break;
+      } else if (isLamp(y, c) && isLamp(r, c)) {
+        down = true;
+        break;
+      }
+    }
+    for (int y = r - 1; y >= 0; y--) {
+      if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
+        up = false;
+        break;
+      } else if (isLamp(y, c) && isLamp(r, c)) {
+        up = true;
+        break;
+      }
+    }
+
+    for (int x = c + 1; x < activePuzzle.getWidth(); x++) {
+      if (activePuzzle.getCellType(r, x) != CellType.CORRIDOR) {
+        right = false;
+        break;
+      } else if (isLamp(r, x) && (isLamp(r, c))) {
+        right = true;
+        break;
+      }
+    }
+    for (int x = c - 1; x >= 0; x--) {
+      if (activePuzzle.getCellType(r, x) != CellType.CORRIDOR) {
+        left = false;
+        break;
+      } else if (isLamp(r, x) && (isLamp(r, c))) {
+        left = true;
+        break;
+      }
+    }
+
+    return up || down || left || right;
+    /*if (!isLamp(r, c)) {
       throw new IllegalArgumentException();
     }
 
@@ -130,7 +174,7 @@ public class ModelImpl implements Model {
       return true;
     } else {
       return false;
-    }
+    }*/
   }
 
   @Override
@@ -148,8 +192,8 @@ public class ModelImpl implements Model {
     if (index < 0 || index >= library.size()) {
       throw new IndexOutOfBoundsException();
     } else {
-      activePuzzleIndex = index;
-      activePuzzle = library.getPuzzle(index);
+      this.activePuzzleIndex = index;
+      this.activePuzzle = library.getPuzzle(index);
     }
     notifyObserver();
   }
