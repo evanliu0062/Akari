@@ -122,45 +122,50 @@ public class ModelImpl implements Model {
       throw new IllegalArgumentException();
     }
 
+    int x1 = c + 1;
+    int x2 = c - 1;
+    int y1 = r + 1;
+    int y2 = r - 1;
+
     boolean right = false;
     boolean left = false;
     boolean down = false;
     boolean up = false;
 
-    for (int y = r + 1; y < activePuzzle.getHeight(); y++) {
-      if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
-        down = false;
-        break;
-      } else if (isLamp(y, c) && isLamp(r, c)) {
-        down = true;
-        break;
-      }
-    }
-    for (int y = r - 1; y >= 0; y--) {
-      if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
-        up = false;
-        break;
-      } else if (isLamp(y, c) && isLamp(r, c)) {
-        up = true;
-        break;
-      }
-    }
-
-    for (int x = c + 1; x < activePuzzle.getWidth(); x++) {
+    for (int x = x1; x < activePuzzle.getWidth(); x++) {
       if (activePuzzle.getCellType(r, x) != CellType.CORRIDOR) {
         right = false;
         break;
-      } else if (isLamp(r, x) && (isLamp(r, c))) {
+      } else if (isLamp(r, c) && isLamp(r, x)) {
         right = true;
         break;
       }
     }
-    for (int x = c - 1; x >= 0; x--) {
+    for (int x = x2; x >= 0; x--) {
       if (activePuzzle.getCellType(r, x) != CellType.CORRIDOR) {
         left = false;
         break;
-      } else if (isLamp(r, x) && (isLamp(r, c))) {
+      } else if ((isLamp(r, c)) && isLamp(r, x)) {
         left = true;
+        break;
+      }
+    }
+
+    for (int y = y1; y < activePuzzle.getHeight(); y++) {
+      if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
+        down = false;
+        break;
+      } else if (isLamp(r, c) && isLamp(y, c)) {
+        down = true;
+        break;
+      }
+    }
+    for (int y = y2; y >= 0; y--) {
+      if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
+        up = false;
+        break;
+      } else if (isLamp(r, c) && isLamp(y, c)) {
+        up = true;
         break;
       }
     }
