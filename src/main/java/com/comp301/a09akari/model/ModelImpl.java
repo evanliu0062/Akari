@@ -68,25 +68,6 @@ public class ModelImpl implements Model {
     boolean down = false;
     boolean up = false;
 
-    for (int y = r; y < activePuzzle.getHeight(); y++) {
-      if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
-        down = false;
-        break;
-      } else if (isLamp(y, c)) {
-        down = true;
-        break;
-      }
-    }
-    for (int y = r; y >= 0; y--) {
-      if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
-        up = false;
-        break;
-      } else if (isLamp(y, c)) {
-        up = true;
-        break;
-      }
-    }
-
     for (int x = c; x < activePuzzle.getWidth(); x++) {
       if (activePuzzle.getCellType(r, x) != CellType.CORRIDOR) {
         right = false;
@@ -102,6 +83,25 @@ public class ModelImpl implements Model {
         break;
       } else if (isLamp(r, x)) {
         left = true;
+        break;
+      }
+    }
+
+    for (int y = r; y < activePuzzle.getHeight(); y++) {
+      if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
+        down = false;
+        break;
+      } else if (isLamp(y, c)) {
+        down = true;
+        break;
+      }
+    }
+    for (int y = r; y >= 0; y--) {
+      if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
+        up = false;
+        break;
+      } else if (isLamp(y, c)) {
+        up = true;
         break;
       }
     }
@@ -172,7 +172,7 @@ public class ModelImpl implements Model {
       throw new IllegalArgumentException();
     }
 
-    int x1 = c + 1;
+    /*int x1 = c + 1;
     int x2 = c - 1;
     int y1 = r + 1;
     int y2 = r - 1;
@@ -228,8 +228,8 @@ public class ModelImpl implements Model {
       }
     }
 
-    return left || right || up || down;
-    /*if (!isLamp(r, c)) {
+    return left || right || up || down;*/
+    if (!isLamp(r, c)) {
       throw new IllegalArgumentException();
     }
 
@@ -237,7 +237,7 @@ public class ModelImpl implements Model {
       return true;
     } else {
       return false;
-    }*/
+    }
   }
 
   @Override
