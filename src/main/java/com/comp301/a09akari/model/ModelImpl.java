@@ -20,7 +20,7 @@ public class ModelImpl implements Model {
     this.library = library;
     this.activePuzzle = library.getPuzzle(activePuzzleIndex);
     this.observers = new ArrayList<>();
-    this.lampBoard = new int[activePuzzle.getHeight()][activePuzzle.getWidth()];
+    this.lampBoard = new int[][] {};
   }
 
   @Override
@@ -232,11 +232,21 @@ public class ModelImpl implements Model {
     for (int x = 0; x < activePuzzle.getWidth(); x++) {
       for (int y = 0; y < activePuzzle.getHeight(); y++) {
         if (activePuzzle.getCellType(x, y) == CellType.CORRIDOR) {
-          if (isLit(x, y)) {}
+          if (!isLamp(x, y)) {
+            if (!isLit(x, y)) {
+              return false;
+            }
+          }
         }
+        if (activePuzzle.getCellType(x, y) == CellType.CLUE) {
+          if (!isClueSatisfied(x, y)) {
+            return false;
+          }
+        }
+        if (isLampIllegal(x, y)) {}
       }
     }
-    return false;
+    return true;
   }
 
   @Override
