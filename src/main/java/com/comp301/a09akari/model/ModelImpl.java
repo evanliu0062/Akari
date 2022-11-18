@@ -235,12 +235,13 @@ public class ModelImpl implements Model {
           if (!isLit(x, y)) {
             return false;
           }
-          if (lampBoard[x][x] == 1) {
+          if (isLamp(x, y)) {
             if (isLampIllegal(x, y)) {
               return false;
             }
           }
-        } else if (activePuzzle.getCellType(x, y) == CellType.CLUE) {
+        }
+        if (activePuzzle.getCellType(x, y) == CellType.CLUE) {
           if (!isClueSatisfied(x, y)) {
             return false;
           }
