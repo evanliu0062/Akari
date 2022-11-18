@@ -242,21 +242,21 @@ public class ModelImpl implements Model {
   @Override
   public boolean isClueSatisfied(int r, int c) {
     /*if (r < 0 || c < 0 || c >= activePuzzle.getWidth() || r >= activePuzzle.getHeight()) {
-      throw new IndexOutOfBoundsException();
+      return false;
     }*/
 
     int clue = library.getPuzzle(activePuzzleIndex).getClue(r, c);
     int count = 0;
-    if (isLamp(r + 1, c)) {
+    if (isLamp(r + 1, c) && (r + 1) < activePuzzle.getHeight()) {
       count++;
     }
-    if (isLamp(r - 1, c)) {
+    if (isLamp(r - 1, c) && (r - 1) >= 0) {
       count++;
     }
-    if (isLamp(r, c + 1)) {
+    if (isLamp(r, c + 1) && (c + 1) < activePuzzle.getWidth()) {
       count++;
     }
-    if (isLamp(r, c - 1)) {
+    if (isLamp(r, c - 1) && (c - 1) >= 0) {
       count++;
     }
     return clue == count;
