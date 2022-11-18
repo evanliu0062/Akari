@@ -53,9 +53,9 @@ public class ModelImpl implements Model {
 
   @Override
   public boolean isLit(int r, int c) {
-    /*if (r < 0 || c < 0 || c >= activePuzzle.getWidth() || r >= activePuzzle.getHeight()) {
+    if (r < 0 || c < 0 || c >= activePuzzle.getWidth() || r >= activePuzzle.getHeight()) {
       throw new IndexOutOfBoundsException();
-    }*/
+    }
 
     if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) == CellType.CORRIDOR) {
       if (lampBoard[r][c] == 1) {
@@ -149,6 +149,7 @@ public class ModelImpl implements Model {
       throw new IndexOutOfBoundsException();
     } else {
       activePuzzleIndex = index;
+      activePuzzle = library.getPuzzle(index);
     }
     notifyObserver();
   }
