@@ -59,45 +59,45 @@ public class ModelImpl implements Model {
 
     if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
       throw new IllegalArgumentException();
-    } else {
-      if (lampBoard[r][c] == 1) {
+    }
+    if (lampBoard[r][c] == 1) {
+      return true;
+    }
+
+    for (int x = r; x < lampBoard.length; x++) {
+      if (library.getPuzzle(activePuzzleIndex).getCellType(x, c) != CellType.CORRIDOR) {
+        break;
+      }
+      if (lampBoard[x][c] == 1) {
         return true;
       }
-
-      for (int x = r; x < lampBoard.length; x++) {
-        if (library.getPuzzle(activePuzzleIndex).getCellType(x, c) != CellType.CORRIDOR) {
-          break;
-        }
-        if (lampBoard[x][c] == 1) {
-          return true;
-        }
+    }
+    for (int x = r; x >= 0; x--) {
+      if (library.getPuzzle(activePuzzleIndex).getCellType(x, c) != CellType.CORRIDOR) {
+        break;
       }
-      for (int x = r; x >= 0; x--) {
-        if (library.getPuzzle(activePuzzleIndex).getCellType(x, c) != CellType.CORRIDOR) {
-          break;
-        }
-        if (lampBoard[x][c] == 1) {
-          return true;
-        }
-      }
-
-      for (int y = c; y < lampBoard.length; y++) {
-        if (library.getPuzzle(activePuzzleIndex).getCellType(r, y) != CellType.CORRIDOR) {
-          break;
-        }
-        if (lampBoard[r][y] == 1) {
-          return true;
-        }
-      }
-      for (int y = c; y >= 0; y--) {
-        if (library.getPuzzle(activePuzzleIndex).getCellType(r, y) != CellType.CORRIDOR) {
-          break;
-        }
-        if (lampBoard[r][y] == 1) {
-          return true;
-        }
+      if (lampBoard[x][c] == 1) {
+        return true;
       }
     }
+
+    for (int y = c; y < lampBoard.length; y++) {
+      if (library.getPuzzle(activePuzzleIndex).getCellType(r, y) != CellType.CORRIDOR) {
+        break;
+      }
+      if (lampBoard[r][y] == 1) {
+        return true;
+      }
+    }
+    for (int y = c; y >= 0; y--) {
+      if (library.getPuzzle(activePuzzleIndex).getCellType(r, y) != CellType.CORRIDOR) {
+        break;
+      }
+      if (lampBoard[r][y] == 1) {
+        return true;
+      }
+    }
+
     return false;
   }
 
@@ -118,6 +118,10 @@ public class ModelImpl implements Model {
     if (r < 0 || c < 0 || c >= activePuzzle.getWidth() || r >= activePuzzle.getHeight()) {
       throw new IndexOutOfBoundsException();
     }
+    if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
+      throw new IllegalArgumentException();
+    }
+
     if (!isLamp(r, c)) {
       throw new IllegalArgumentException();
     }
