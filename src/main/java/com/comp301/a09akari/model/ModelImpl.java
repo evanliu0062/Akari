@@ -69,86 +69,44 @@ public class ModelImpl implements Model {
     boolean up = false;
 
     for (int x = c; x < activePuzzle.getWidth(); x++) {
-      if (activePuzzle.getCellType(r, x) != CellType.CORRIDOR) {
+      if ((activePuzzle.getCellType(r, x) == CellType.CORRIDOR) == false) {
         right = false;
         break;
-      } else if (isLamp(r, x)) {
+      } else if (isLamp(r, x) != false) {
         right = true;
         break;
       }
     }
     for (int x = c; x >= 0; x--) {
-      if (activePuzzle.getCellType(r, x) != CellType.CORRIDOR) {
+      if ((activePuzzle.getCellType(r, x) == CellType.CORRIDOR) == false) {
         left = false;
         break;
-      } else if (isLamp(r, x)) {
+      } else if (isLamp(r, x) != false) {
         left = true;
         break;
       }
     }
 
     for (int y = r; y < activePuzzle.getHeight(); y++) {
-      if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
+      if ((activePuzzle.getCellType(y, c) == CellType.CORRIDOR) == false) {
         down = false;
         break;
-      } else if (isLamp(y, c)) {
+      } else if (isLamp(y, c) != false) {
         down = true;
         break;
       }
     }
     for (int y = r; y >= 0; y--) {
-      if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
+      if ((activePuzzle.getCellType(y, c) != CellType.CORRIDOR) == false) {
         up = false;
         break;
-      } else if (isLamp(y, c)) {
+      } else if (isLamp(y, c) != false) {
         up = true;
         break;
       }
     }
 
     return right || left || up || down;
-    /*if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) == CellType.CORRIDOR) {
-      if (lampBoard[r][c] == 1) {
-        return true;
-      }
-
-      for (int x = r; x < lampBoard.length; x++) {
-        if (library.getPuzzle(activePuzzleIndex).getCellType(x, c) != CellType.CORRIDOR) {
-          break;
-        }
-        if (lampBoard[x][c] == 1) {
-          return true;
-        }
-      }
-      for (int x = r; x >= 0; x--) {
-        if (library.getPuzzle(activePuzzleIndex).getCellType(x, c) != CellType.CORRIDOR) {
-          break;
-        }
-        if (lampBoard[x][c] == 1) {
-          return true;
-        }
-      }
-
-      for (int y = c; y < lampBoard.length; y++) {
-        if (library.getPuzzle(activePuzzleIndex).getCellType(r, y) != CellType.CORRIDOR) {
-          break;
-        }
-        if (lampBoard[r][y] == 1) {
-          return true;
-        }
-      }
-      for (int y = c; y >= 0; y--) {
-        if (library.getPuzzle(activePuzzleIndex).getCellType(r, y) != CellType.CORRIDOR) {
-          break;
-        }
-        if (lampBoard[r][y] == 1) {
-          return true;
-        }
-      }
-    } else {
-      throw new IllegalArgumentException();
-    }
-    return false;*/
   }
 
   @Override
@@ -172,7 +130,7 @@ public class ModelImpl implements Model {
       throw new IllegalArgumentException();
     }
 
-    /*int x1 = c + 1;
+    int x1 = c + 1;
     int x2 = c - 1;
     int y1 = r + 1;
     int y2 = r - 1;
@@ -228,16 +186,7 @@ public class ModelImpl implements Model {
       }
     }
 
-    return left || right || up || down;*/
-    if (!isLamp(r, c)) {
-      throw new IllegalArgumentException();
-    }
-
-    if (isLit(r, c)) {
-      return true;
-    } else {
-      return false;
-    }
+    return left || right || up || down;
   }
 
   @Override
