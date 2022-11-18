@@ -240,8 +240,7 @@ public class ModelImpl implements Model {
               return false;
             }
           }
-        }
-        if (activePuzzle.getCellType(x, y) == CellType.CLUE) {
+        } else if (activePuzzle.getCellType(x, y) == CellType.CLUE) {
           if (!isClueSatisfied(x, y)) {
             return false;
           }
