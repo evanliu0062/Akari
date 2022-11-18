@@ -20,7 +20,7 @@ public class ModelImpl implements Model {
     this.library = library;
     this.activePuzzle = library.getPuzzle(activePuzzleIndex);
     this.observers = new ArrayList<>();
-    this.lampBoard = new int[][] {};
+    this.lampBoard = new int[activePuzzle.getHeight()][activePuzzle.getWidth()];
   }
 
   @Override
@@ -206,6 +206,7 @@ public class ModelImpl implements Model {
     } else {
       this.activePuzzleIndex = index;
       this.activePuzzle = library.getPuzzle(index);
+      lampBoard = new int[activePuzzle.getHeight()][activePuzzle.getWidth()];
     }
     notifyObserver();
   }
