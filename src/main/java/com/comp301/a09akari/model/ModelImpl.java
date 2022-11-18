@@ -6,8 +6,8 @@ import java.util.List;
 
 public class ModelImpl implements Model {
   private PuzzleLibrary library;
-  private List<Integer> lampList;
-  private int activePuzzleIndex;
+  private Puzzle activePuzzle;
+  private int activePuzzleIndex = 0;
   private List<ModelObserver> observers;
   // lampBoard contains: 0 = Not Lamp, 1 = Lamp
   private int[][] lampBoard;
@@ -18,8 +18,9 @@ public class ModelImpl implements Model {
     }
 
     this.library = library;
-    this.lampList = new ArrayList<>();
+    this.activePuzzle = library.getPuzzle(activePuzzleIndex);
     this.observers = new ArrayList<>();
+    this.lampBoard = new int[activePuzzle.getHeight()][activePuzzle.getWidth()];
   }
 
   @Override
