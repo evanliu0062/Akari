@@ -122,50 +122,50 @@ public class ModelImpl implements Model {
       throw new IllegalArgumentException();
     }
 
-    boolean down = false;
-    boolean up = false;
     boolean right = false;
     boolean left = false;
+    boolean down = false;
+    boolean up = false;
 
     for (int y = r + 1; y < activePuzzle.getHeight(); y++) {
-      if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
-        down = false;
-        break;
-      } else if (isLamp(y, c) && isLamp(r, c)) {
+      if (isLamp(y, c) && isLamp(r, c)) {
         down = true;
+        break;
+      } else if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
+        down = false;
         break;
       }
     }
     for (int y = r - 1; y >= 0; y--) {
-      if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
-        up = false;
-        break;
-      } else if (isLamp(y, c) && isLamp(r, c)) {
+      if (isLamp(y, c) && isLamp(r, c)) {
         up = true;
+        break;
+      } else if (activePuzzle.getCellType(y, c) != CellType.CORRIDOR) {
+        up = false;
         break;
       }
     }
 
     for (int x = c + 1; x < activePuzzle.getWidth(); x++) {
-      if (activePuzzle.getCellType(r, x) != CellType.CORRIDOR) {
-        right = false;
-        break;
-      } else if (isLamp(r, x) && (isLamp(r, c))) {
+      if (isLamp(r, x) && (isLamp(r, c))) {
         right = true;
+        break;
+      } else if (activePuzzle.getCellType(r, x) != CellType.CORRIDOR) {
+        right = false;
         break;
       }
     }
     for (int x = c - 1; x >= 0; x--) {
-      if (activePuzzle.getCellType(r, x) != CellType.CORRIDOR) {
-        left = false;
-        break;
-      } else if (isLamp(r, x) && (isLamp(r, c))) {
+      if (isLamp(r, x) && (isLamp(r, c))) {
         left = true;
+        break;
+      } else if (activePuzzle.getCellType(r, x) != CellType.CORRIDOR) {
+        left = false;
         break;
       }
     }
 
-    return up || down || left || right;
+    return left || right || up || down;
     /*if (!isLamp(r, c)) {
       throw new IllegalArgumentException();
     }
