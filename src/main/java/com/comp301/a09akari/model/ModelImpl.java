@@ -123,9 +123,9 @@ public class ModelImpl implements Model {
     }
 
     if (isLit(r, c)) {
-      return false;
-    } else {
       return true;
+    } else {
+      return false;
     }
   }
 
