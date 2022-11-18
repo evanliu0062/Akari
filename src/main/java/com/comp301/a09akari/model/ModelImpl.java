@@ -206,7 +206,6 @@ public class ModelImpl implements Model {
     } else {
       this.activePuzzleIndex = index;
       this.activePuzzle = library.getPuzzle(index);
-      lampBoard = new int[activePuzzle.getHeight()][activePuzzle.getWidth()];
     }
     notifyObserver();
   }
@@ -252,9 +251,9 @@ public class ModelImpl implements Model {
 
   @Override
   public boolean isClueSatisfied(int r, int c) {
-    /*if (r < 0 || c < 0 || c >= activePuzzle.getWidth() || r >= activePuzzle.getHeight()) {
-      return false;
-    }*/
+    if (r < 0 || c < 0 || c >= activePuzzle.getWidth() || r >= activePuzzle.getHeight()) {
+      throw new IndexOutOfBoundsException();
+    }
 
     int clue = library.getPuzzle(activePuzzleIndex).getClue(r, c);
     int count = 0;
