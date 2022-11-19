@@ -231,13 +231,13 @@ public class ModelImpl implements Model {
   public boolean isSolved() {
     for (int y = 0; y < getActivePuzzle().getWidth(); y++) {
       for (int x = 0; x < getActivePuzzle().getHeight(); x++) {
-        if (library.getPuzzle(activePuzzleIndex).getCellType(x, y) == CellType.CORRIDOR) {
+        if (getActivePuzzle().getCellType(x, y) == CellType.CORRIDOR) {
           if (isLit(x, y) == false) {
             return false;
           }
         }
 
-        if (library.getPuzzle(activePuzzleIndex).getCellType(x, y) == CellType.CLUE) {
+        if (getActivePuzzle().getCellType(x, y) == CellType.CLUE) {
           if (isClueSatisfied(x, y) == false) {
             return false;
           }
