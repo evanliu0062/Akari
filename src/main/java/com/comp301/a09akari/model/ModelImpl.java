@@ -115,9 +115,9 @@ public class ModelImpl implements Model {
       throw new IndexOutOfBoundsException();
     }
 
-    /*if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
+    if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
       throw new IllegalArgumentException();
-    }*/
+    }
     return lampBoard[r][c] == 1;
   }
 
