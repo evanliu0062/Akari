@@ -229,15 +229,22 @@ public class ModelImpl implements Model {
 
   @Override
   public boolean isSolved() {
-    for (int x = 0; x < activePuzzle.getHeight(); x++) {
-      for (int y = 0; y < activePuzzle.getWidth(); y++) {
-        if (activePuzzle.getCellType(x, y) == CellType.CORRIDOR) {
-          if (!isLit(x, y)) return false;
-          if (lampBoard[x][y] == 1) {
-            if (isLampIllegal(x, y)) return false;
+    for (int c = 0; c < lampBoard[0].length; c++) {
+      for (int r = 0; r < lampBoard.length; r++) {
+        if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) == CellType.CLUE) {
+          if (isClueSatisfied(r, c) == false) {
+            return false;
           }
-        } else if (activePuzzle.getCellType(x, y) == CellType.CLUE) {
-          if (!isClueSatisfied(x, y)) return false;
+        }
+        if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) == CellType.CORRIDOR) {
+          if (isLit(r, c) == false) {
+            return false;
+          }
+        }
+        if (lampBoard[r][c] == 1) {
+          if (isLampIllegal(r, c)) {
+            return false;
+          }
         }
       }
     }
