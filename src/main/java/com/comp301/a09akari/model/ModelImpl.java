@@ -247,7 +247,7 @@ public class ModelImpl implements Model {
           }
         }
 
-        if (lampBoard[x][y] != 0) {
+        if (isLamp(x, y)) {
           if (isLampIllegal(x, y)) {
             return false;
           }
