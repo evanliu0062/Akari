@@ -211,6 +211,7 @@ public class ModelImpl implements Model {
       this.activePuzzleIndex = index;
       this.activePuzzle = library.getPuzzle(index);
     }
+    lampBoard = new int[getActivePuzzle().getHeight()][getActivePuzzle().getWidth()];
     notifyObserver();
   }
 
