@@ -126,9 +126,9 @@ public class ModelImpl implements Model {
     if (r < 0 || c < 0 || c >= activePuzzle.getWidth() || r >= activePuzzle.getHeight()) {
       throw new IndexOutOfBoundsException();
     }
-    if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
+    /*if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
       throw new IllegalArgumentException();
-    }
+    }*/
 
     if (!isLamp(r, c)) {
       throw new IllegalArgumentException();
@@ -247,9 +247,11 @@ public class ModelImpl implements Model {
           }
         }
 
-        if (isLamp(x, y)) {
-          if (isLampIllegal(x, y)) {
-            return false;
+        if (getActivePuzzle().getCellType(x, y) == CellType.CORRIDOR) {
+          if (isLamp(x, y)) {
+            if (isLampIllegal(x, y)) {
+              return false;
+            }
           }
         }
       }
