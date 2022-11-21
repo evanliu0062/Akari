@@ -204,8 +204,8 @@ public class ModelImpl implements Model {
       throw new IndexOutOfBoundsException();
     } else {
       this.activePuzzleIndex = index;
-      resetPuzzle();
       this.activePuzzle = library.getPuzzle(index);
+      resetPuzzle();
     }
     notifyObserver();
   }
