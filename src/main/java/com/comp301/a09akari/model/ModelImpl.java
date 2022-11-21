@@ -229,8 +229,8 @@ public class ModelImpl implements Model {
 
   @Override
   public boolean isSolved() {
-    for (int y = 0; y < getActivePuzzle().getHeight(); y++) {
-      for (int x = 0; x < getActivePuzzle().getWidth(); x++) {
+    for (int x = 0; x < getActivePuzzle().getHeight(); x++) {
+      for (int y = 0; y < getActivePuzzle().getWidth(); y++) {
         if (getActivePuzzle().getCellType(x, y) == CellType.CORRIDOR) {
           if (isLit(x, y) == false) {
             return false;
