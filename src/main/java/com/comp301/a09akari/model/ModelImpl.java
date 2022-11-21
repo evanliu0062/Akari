@@ -206,6 +206,7 @@ public class ModelImpl implements Model {
     } else {
       this.activePuzzleIndex = index;
       this.activePuzzle = library.getPuzzle(index);
+      resetPuzzle();
     }
     notifyObserver();
   }
