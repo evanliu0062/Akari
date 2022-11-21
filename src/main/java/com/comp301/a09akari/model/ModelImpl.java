@@ -130,6 +130,10 @@ public class ModelImpl implements Model {
       throw new IllegalArgumentException();
     }
 
+    if (!isLamp(r, c)) {
+      throw new IllegalArgumentException();
+    }
+
     int x1 = c + 1;
     int x2 = c - 1;
     int y1 = r + 1;
