@@ -1,6 +1,7 @@
 package com.comp301.a09akari.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ModelImpl implements Model {
@@ -205,7 +206,6 @@ public class ModelImpl implements Model {
     } else {
       this.activePuzzleIndex = index;
       this.activePuzzle = library.getPuzzle(index);
-      resetPuzzle();
     }
     notifyObserver();
   }
