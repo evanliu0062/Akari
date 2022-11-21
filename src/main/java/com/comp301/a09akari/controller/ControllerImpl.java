@@ -14,9 +14,10 @@ public class ControllerImpl implements AlternateMvcController {
 
   @Override
   public void clickNextPuzzle() {
-    if (model.getActivePuzzleIndex() < model.getPuzzleLibrarySize() - 1) {
+    if (model.getActivePuzzleIndex() == model.getPuzzleLibrarySize() - 1) {
+
+    } else {
       model.setActivePuzzleIndex(model.getActivePuzzleIndex() + 1);
-      model.getActivePuzzle();
     }
   }
 
@@ -24,7 +25,6 @@ public class ControllerImpl implements AlternateMvcController {
   public void clickPrevPuzzle() {
     if (model.getActivePuzzleIndex() >= 1) {
       model.setActivePuzzleIndex(model.getActivePuzzleIndex() - 1);
-      model.getActivePuzzle();
     }
   }
 
@@ -32,7 +32,6 @@ public class ControllerImpl implements AlternateMvcController {
   public void clickRandPuzzle() {
     int randomIndex = (int) Math.floor(Math.random() * (model.getPuzzleLibrarySize() - 1));
     model.setActivePuzzleIndex(randomIndex);
-    model.getActivePuzzle();
   }
 
   @Override
