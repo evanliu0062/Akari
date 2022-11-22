@@ -275,7 +275,7 @@ public class ModelImpl implements Model {
         count++;
       }
     }
-    if ((r - 1) >= 0) {
+    if ((r) > 0) {
       if (isLamp(r - 1, c)) {
         count++;
       }
@@ -285,7 +285,7 @@ public class ModelImpl implements Model {
         count++;
       }
     }
-    if ((c - 1) >= 0) {
+    if ((c) > 0) {
       if (isLamp(r, c - 1)) {
         count++;
       }
