@@ -69,7 +69,7 @@ public class ModelImpl implements Model {
     boolean up = false;
 
     for (int x = c; x < activePuzzle.getWidth(); x++) {
-      if ((activePuzzle.getCellType(r, x) == CellType.CORRIDOR) == false) {
+      if (!(activePuzzle.getCellType(r, x) == CellType.CORRIDOR)) {
         right = false;
         break;
       } else if (isLamp(r, x) != false) {
@@ -78,7 +78,7 @@ public class ModelImpl implements Model {
       }
     }
     for (int x = c; x >= 0; x--) {
-      if ((activePuzzle.getCellType(r, x) == CellType.CORRIDOR) == false) {
+      if (!(activePuzzle.getCellType(r, x) == CellType.CORRIDOR)) {
         left = false;
         break;
       } else if (isLamp(r, x) != false) {
@@ -88,7 +88,7 @@ public class ModelImpl implements Model {
     }
 
     for (int y = r; y < activePuzzle.getHeight(); y++) {
-      if ((activePuzzle.getCellType(y, c) == CellType.CORRIDOR) == false) {
+      if (!(activePuzzle.getCellType(y, c) == CellType.CORRIDOR)) {
         down = false;
         break;
       } else if (isLamp(y, c) != false) {
@@ -97,7 +97,7 @@ public class ModelImpl implements Model {
       }
     }
     for (int y = r; y >= 0; y--) {
-      if ((activePuzzle.getCellType(y, c) != CellType.CORRIDOR) == false) {
+      if (!(activePuzzle.getCellType(y, c) == CellType.CORRIDOR)) {
         up = false;
         break;
       } else if (isLamp(y, c) != false) {
