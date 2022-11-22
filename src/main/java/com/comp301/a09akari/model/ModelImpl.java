@@ -126,9 +126,6 @@ public class ModelImpl implements Model {
     if (r < 0 || c < 0 || c >= activePuzzle.getWidth() || r >= activePuzzle.getHeight()) {
       throw new IndexOutOfBoundsException();
     }
-    /*if (library.getPuzzle(activePuzzleIndex).getCellType(r, c) != CellType.CORRIDOR) {
-      throw new IllegalArgumentException();
-    }*/
 
     if (!isLamp(r, c)) {
       throw new IllegalArgumentException();

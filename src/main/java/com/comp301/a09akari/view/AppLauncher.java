@@ -33,14 +33,10 @@ public class AppLauncher extends Application {
     Model model = new ModelImpl(library);
     AlternateMvcController controller = new ControllerImpl(model);
     PuzzleView view = new PuzzleView(controller);
-
-    Pane layout = new VBox();
-
-    layout.getStyleClass().add("layout");
+    View grid = new View(controller);
 
     Scene scene = new Scene(view.render());
 
-    scene.getStylesheets().add("style/main.css");
     stage.setScene(scene);
     model.addObserver(
         (Model m) -> {
@@ -48,7 +44,6 @@ public class AppLauncher extends Application {
           stage.sizeToScene();
         });
     stage.setTitle("Akari");
-
 
     stage.show();
   }
