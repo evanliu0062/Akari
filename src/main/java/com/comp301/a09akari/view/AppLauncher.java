@@ -16,11 +16,8 @@ public class AppLauncher extends Application {
     stage.setTitle("Akari");
 
     Pane layout = new VBox();
-    layout.getStyleClass().add("layout");
 
-    Pane titleContainer = new HBox();
-    Label title = new Label("Akari by Evan Liu");
-    titleContainer.getStyleClass().add("title");
+    layout.getStyleClass().add("layout");
 
     Scene scene = new Scene(layout, 1000, 1000);
     scene.getStylesheets().add("style/main.css");
