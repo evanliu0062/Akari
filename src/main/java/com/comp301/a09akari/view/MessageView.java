@@ -3,6 +3,7 @@ package com.comp301.a09akari.view;
 import com.comp301.a09akari.controller.AlternateMvcController;
 import com.comp301.a09akari.controller.ClassicMvcController;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -17,10 +18,10 @@ public class MessageView implements FXComponent {
   public Parent render() {
     VBox layout = new VBox();
 
-    Text solvedMessage = new Text();
+    Label solvedMessage = new Label();
     solvedMessage.setText("Puzzle Solved!");
 
-    Text continueMessage = new Text();
+    Label continueMessage = new Label();
     continueMessage.setText("Select an Option to continue.");
 
     layout.getChildren().add(solvedMessage);

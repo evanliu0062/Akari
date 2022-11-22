@@ -1,8 +1,11 @@
 package com.comp301.a09akari.view;
 
 import com.comp301.a09akari.controller.AlternateMvcController;
+import com.comp301.a09akari.model.Model;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 import java.awt.*;
 
@@ -15,10 +18,21 @@ public class PuzzleView implements FXComponent {
 
   @Override
   public Parent render() {
-    GridPane grid = new GridPane();
-    grid.setHgap(controller.getActivePuzzle().getHeight());
-    grid.setVgap(controller.getActivePuzzle().getWidth());
+    VBox layout = new VBox();
 
-    return grid;
+    // Controls view
+    ControlView controlsView = new ControlView(controller);
+    layout.getChildren().add(controlsView.render());
+
+    // Puzzle view
+    PuzzleView puzzleView = new PuzzleView(controller);
+    layout.getChildren().add(puzzleView.render());
+    layout.setAlignment(Pos.CENTER);
+
+    // Message view
+    MessageView messageView = new MessageView(controller);
+    layout.getChildren().add(messageView.render());
+
+    return layout;
   }
 }
