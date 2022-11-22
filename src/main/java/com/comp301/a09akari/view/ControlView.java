@@ -22,39 +22,43 @@ public class ControlView implements FXComponent {
 
     Button nextPuzzleButton = new Button("Next");
     nextPuzzleButton.setPrefSize(50, 30);
-    nextPuzzleButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent actionEvent) {
-        controller.clickNextPuzzle();
-      }
-    });
+    nextPuzzleButton.setOnAction(
+        new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(ActionEvent actionEvent) {
+            controller.clickNextPuzzle();
+          }
+        });
 
     Button prevPuzzleButton = new Button("Previous");
     prevPuzzleButton.setPrefSize(50, 30);
-    prevPuzzleButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent actionEvent) {
-        controller.clickPrevPuzzle();
-      }
-    });
+    prevPuzzleButton.setOnAction(
+        new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(ActionEvent actionEvent) {
+            controller.clickPrevPuzzle();
+          }
+        });
 
     Button shufflePuzzleButton = new Button("Shuffle");
     shufflePuzzleButton.setPrefSize(50, 30);
-    shufflePuzzleButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent actionEvent) {
-        controller.clickRandPuzzle();
-      }
-    });
+    shufflePuzzleButton.setOnAction(
+        new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(ActionEvent actionEvent) {
+            controller.clickRandPuzzle();
+          }
+        });
 
     Button resetPuzzleButton = new Button("Reset");
     resetPuzzleButton.setPrefSize(50, 30);
-    resetPuzzleButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent actionEvent) {
-        controller.clickResetPuzzle();
-      }
-    });
+    resetPuzzleButton.setOnAction(
+        new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(ActionEvent actionEvent) {
+            controller.clickResetPuzzle();
+          }
+        });
 
     layout.getChildren().add(nextPuzzleButton);
     layout.getChildren().add(prevPuzzleButton);
