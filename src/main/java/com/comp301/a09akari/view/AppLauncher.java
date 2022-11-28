@@ -32,8 +32,7 @@ public class AppLauncher extends Application {
 
     Model model = new ModelImpl(library);
     AlternateMvcController controller = new ControllerImpl(model);
-    PuzzleView view = new PuzzleView(controller);
-    View grid = new View(controller);
+    View view = new View(controller);
 
     Scene scene = new Scene(view.render());
 

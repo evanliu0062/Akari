@@ -15,7 +15,7 @@ public class ControllerImpl implements AlternateMvcController {
   @Override
   public void clickNextPuzzle() {
     if (model.getActivePuzzleIndex() == model.getPuzzleLibrarySize() - 1) {
-
+      model.setActivePuzzleIndex(0);
     } else {
       model.setActivePuzzleIndex(model.getActivePuzzleIndex() + 1);
     }

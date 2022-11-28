@@ -2,17 +2,18 @@ package com.comp301.a09akari.view;
 
 import com.comp301.a09akari.controller.AlternateMvcController;
 import com.comp301.a09akari.model.CellType;
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.control.Button;
 
 import java.awt.*;
 
@@ -38,9 +39,22 @@ public class PuzzleView implements FXComponent {
         }
 
         if (controller.getActivePuzzle().getCellType(x, y) == CellType.CORRIDOR) {
-          Rectangle corridor = new Rectangle(85, 85);
-          corridor.setFill(Color.WHITE);
+          Button corridor = new Button();
+          int finalX = x;
+          int finalY = y;
+          corridor.setOnMouseClicked(
+              mouseEvent -> {
+                MouseButton button = mouseEvent.getButton();
+                if (button == MouseButton.PRIMARY) {
+                  controller.clickCell(finalX, finalY);
+                }
+              });
+          corridor.setPrefSize(85, 85);
           grid.add(corridor, x, y);
+
+          /*ectangle corridor = new Rectangle(85, 85);
+          corridor.setFill(Color.WHITE);
+          grid.add(corridor, x, y);*/
         }
 
         if (controller.getActivePuzzle().getCellType(x, y) == CellType.CLUE) {
@@ -77,6 +91,7 @@ public class PuzzleView implements FXComponent {
         }
       }
     }
+    grid.setAlignment(Pos.CENTER);
     return grid;
   }
 }

@@ -4,8 +4,7 @@ import com.comp301.a09akari.controller.AlternateMvcController;
 import com.comp301.a09akari.model.Model;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -16,6 +15,8 @@ import java.awt.*;
 public class View implements FXComponent {
   private AlternateMvcController controller;
   private VBox layout;
+  private VBox puzzleAndButtons;
+  private StackPane messageAndPuzzle;
   private ControlView controlsView;
   private PuzzleView puzzleView;
   private MessageView messageView;
@@ -23,31 +24,39 @@ public class View implements FXComponent {
   public View(AlternateMvcController controller) {
     this.controller = controller;
     this.layout = new VBox();
+    this.puzzleAndButtons = new VBox();
+    this.messageAndPuzzle = new StackPane();
 
-    // Title
-    HBox title = new HBox();
-    Text titleText = new Text();
-    titleText.setText("Akari by Evan");
-    titleText.setFont(Font.font("Verdana", FontWeight.BOLD, 70));
-    layout.getChildren().add(title);
+    layout.setSpacing(20);
 
     // Controls view
     this.controlsView = new ControlView(controller);
-    layout.getChildren().add(controlsView.render());
 
     // Puzzle view
     this.puzzleView = new PuzzleView(controller);
-    layout.getChildren().add(puzzleView.render());
-    layout.setAlignment(Pos.CENTER);
 
     // Message view
     this.messageView = new MessageView(controller);
-    layout.getChildren().add(messageView.render());
   }
 
   @Override
   public Parent render() {
+    // Title
+    Text titleText = new Text();
+    titleText.setText("Akari by Evan");
+    titleText.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
 
+    layout.getChildren().add(titleText);
+
+    puzzleAndButtons.getChildren().add(controlsView.render());
+
+    messageAndPuzzle.getChildren().add(puzzleView.render());
+    messageAndPuzzle.getChildren().add(messageView.render());
+
+    puzzleAndButtons.getChildren().add(messageAndPuzzle);
+    layout.getChildren().add(puzzleAndButtons);
+
+    layout.setAlignment(Pos.CENTER);
 
     return layout;
   }

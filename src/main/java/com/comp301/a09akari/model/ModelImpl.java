@@ -219,15 +219,8 @@ public class ModelImpl implements Model {
 
   @Override
   public void resetPuzzle() {
-    lampBoard = new int[getActivePuzzle().getHeight()][getActivePuzzle().getWidth()];
-
-    for (int x = 0; x < lampBoard.length; x++) {
-      for (int y = 0; y < lampBoard[0].length; y++) {
-        if (lampBoard[x][y] == 1) {
-          removeLamp(x, y);
-        }
-      }
-    }
+    int[][] newBoard = new int[getActivePuzzle().getHeight()][getActivePuzzle().getWidth()];
+    lampBoard = newBoard;
     notifyObserver();
   }
 
