@@ -27,7 +27,8 @@ public class View implements FXComponent {
     this.puzzleAndButtons = new VBox();
     this.messageAndPuzzle = new StackPane();
 
-    layout.setSpacing(20);
+    puzzleAndButtons.setSpacing(5);
+    layout.setSpacing(10);
 
     // Controls view
     this.controlsView = new ControlView(controller);
@@ -44,7 +45,12 @@ public class View implements FXComponent {
     // Title
     Text titleText = new Text();
     titleText.setText("Akari by Evan");
-    titleText.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
+    titleText.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 50));
+
+    // Puzzle Index
+    Text index = new Text("Puzzle " + (controller.getModel().getActivePuzzleIndex()+1) + " of 5");
+    index.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
+
 
     layout.getChildren().add(titleText);
 
@@ -55,6 +61,7 @@ public class View implements FXComponent {
 
     puzzleAndButtons.getChildren().add(messageAndPuzzle);
     layout.getChildren().add(puzzleAndButtons);
+    layout.getChildren().add(index);
 
     layout.setAlignment(Pos.CENTER);
 

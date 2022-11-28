@@ -68,4 +68,13 @@ public class ControllerImpl implements AlternateMvcController {
   public Puzzle getActivePuzzle() {
     return model.getActivePuzzle();
   }
+
+  @Override
+  public boolean isLampIllegal(int r, int c) {
+    return model.isLampIllegal(r, c);
+  }
+
+  public Model getModel() {
+    return model;
+  }
 }
