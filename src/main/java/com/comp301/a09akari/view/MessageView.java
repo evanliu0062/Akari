@@ -26,10 +26,10 @@ public class MessageView implements FXComponent {
     StackPane messageBox = new StackPane();
     if (controller.isSolved()) {
       VBox layout = new VBox();
-      layout.setSpacing(15);
-      Rectangle textBox1 = new Rectangle(410, 210);
+      layout.setSpacing(0);
+      Rectangle textBox1 = new Rectangle(410, 80);
       textBox1.setFill(Color.GRAY);
-      Rectangle textBox2 = new Rectangle(400, 200);
+      Rectangle textBox2 = new Rectangle(400, 70);
       textBox2.setFill(Color.LIGHTGREEN);
       Text solvedMessage = new Text("Puzzle Solved!");
       solvedMessage.setFont(Font.font("Verdana", FontWeight.SEMI_BOLD, 40));

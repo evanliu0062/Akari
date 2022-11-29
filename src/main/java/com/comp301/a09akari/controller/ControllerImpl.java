@@ -14,16 +14,16 @@ public class ControllerImpl implements AlternateMvcController {
 
   @Override
   public void clickNextPuzzle() {
-    if (model.getActivePuzzleIndex() == model.getPuzzleLibrarySize() - 1) {
-      model.setActivePuzzleIndex(0);
-    } else {
+    if (model.getActivePuzzleIndex() < (model.getPuzzleLibrarySize() - 1)) {
       model.setActivePuzzleIndex(model.getActivePuzzleIndex() + 1);
+    } else {
+      model.setActivePuzzleIndex(0);
     }
   }
 
   @Override
   public void clickPrevPuzzle() {
-    if (model.getActivePuzzleIndex() >= 1) {
+    if (model.getActivePuzzleIndex() > 0) {
       model.setActivePuzzleIndex(model.getActivePuzzleIndex() - 1);
     }
   }

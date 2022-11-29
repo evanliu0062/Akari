@@ -25,7 +25,6 @@ public class View implements FXComponent {
     this.controller = controller;
     this.layout = new VBox();
     this.puzzleAndButtons = new VBox();
-    this.messageAndPuzzle = new StackPane();
 
     puzzleAndButtons.setSpacing(5);
     layout.setSpacing(10);
@@ -48,18 +47,15 @@ public class View implements FXComponent {
     titleText.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 50));
 
     // Puzzle Index
-    Text index = new Text("Puzzle " + (controller.getModel().getActivePuzzleIndex()+1) + " of 5");
+    Text index = new Text("Puzzle " + (controller.getModel().getActivePuzzleIndex() + 1) + " of 5");
     index.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
-
 
     layout.getChildren().add(titleText);
 
     puzzleAndButtons.getChildren().add(controlsView.render());
+    puzzleAndButtons.getChildren().add(puzzleView.render());
+    puzzleAndButtons.getChildren().add(messageView.render());
 
-    messageAndPuzzle.getChildren().add(puzzleView.render());
-    messageAndPuzzle.getChildren().add(messageView.render());
-
-    puzzleAndButtons.getChildren().add(messageAndPuzzle);
     layout.getChildren().add(puzzleAndButtons);
     layout.getChildren().add(index);
 

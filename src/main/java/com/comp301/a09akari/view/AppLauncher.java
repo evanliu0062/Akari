@@ -5,10 +5,12 @@ import com.comp301.a09akari.controller.AlternateMvcController;
 import com.comp301.a09akari.controller.ControllerImpl;
 import com.comp301.a09akari.model.*;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -32,18 +34,31 @@ public class AppLauncher extends Application {
 
     Model model = new ModelImpl(library);
     AlternateMvcController controller = new ControllerImpl(model);
-    View view = new View(controller);
+    MessageView messageView = new MessageView(controller);
+    ControlView controlView = new ControlView(controller);
+    PuzzleView puzzleView = new PuzzleView(controller);
 
-    Scene scene = new Scene(view.render());
+    // Title
+    Text titleText = new Text();
+    titleText.setText("Akari by Evan");
+    titleText.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 50));
 
+    VBox gui = new VBox(titleText, controlView.render(), puzzleView.render(), messageView.render());
+    gui.setSpacing(0);
+    gui.setAlignment(Pos.CENTER);
+
+    Scene scene = new Scene(gui);
     stage.setScene(scene);
-    model.addObserver(
-        (Model m) -> {
-          scene.setRoot(view.render());
-          stage.sizeToScene();
-        });
-    stage.setTitle("Akari");
-
     stage.show();
+    ModelObserver observer =
+        (Model model1) -> {
+          gui.getChildren().clear();
+          gui.getChildren().add(titleText);
+          gui.getChildren().add(controlView.render());
+          gui.getChildren().add(puzzleView.render());
+          gui.getChildren().add(messageView.render());
+          stage.sizeToScene();
+        };
+    model.addObserver(observer);
   }
 }

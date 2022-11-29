@@ -204,10 +204,11 @@ public class ModelImpl implements Model {
   public void setActivePuzzleIndex(int index) {
     if (index < 0 || index >= library.size()) {
       throw new IndexOutOfBoundsException();
-    } else {
-      this.activePuzzleIndex = index;
-      this.activePuzzle = library.getPuzzle(index);
     }
+
+    this.activePuzzleIndex = index;
+    this.activePuzzle = library.getPuzzle(index);
+
     lampBoard = new int[getActivePuzzle().getHeight()][getActivePuzzle().getWidth()];
     notifyObserver();
   }
@@ -261,23 +262,31 @@ public class ModelImpl implements Model {
     int clue = library.getPuzzle(activePuzzleIndex).getClue(r, c);
     int count = 0;
     if ((r + 1) < activePuzzle.getHeight()) {
-      if (isLamp(r + 1, c)) {
-        count++;
+      if (activePuzzle.getCellType(r + 1, c) == CellType.CORRIDOR) {
+        if (isLamp(r + 1, c)) {
+          count++;
+        }
       }
     }
     if ((r) > 0) {
-      if (isLamp(r - 1, c)) {
-        count++;
+      if (activePuzzle.getCellType(r - 1, c) == CellType.CORRIDOR) {
+        if (isLamp(r - 1, c)) {
+          count++;
+        }
       }
     }
     if ((c + 1) < activePuzzle.getWidth()) {
-      if (isLamp(r, c + 1)) {
-        count++;
+      if (activePuzzle.getCellType(r, c + 1) == CellType.CORRIDOR) {
+        if (isLamp(r, c + 1)) {
+          count++;
+        }
       }
     }
     if ((c) > 0) {
-      if (isLamp(r, c - 1)) {
-        count++;
+      if (activePuzzle.getCellType(r, c - 1) == CellType.CORRIDOR) {
+        if (isLamp(r, c - 1)) {
+          count++;
+        }
       }
     }
     return clue == count;

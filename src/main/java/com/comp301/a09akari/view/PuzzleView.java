@@ -2,11 +2,13 @@ package com.comp301.a09akari.view;
 
 import com.comp301.a09akari.controller.AlternateMvcController;
 import com.comp301.a09akari.model.CellType;
+import com.comp301.a09akari.model.Puzzle;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -26,15 +28,17 @@ public class PuzzleView implements FXComponent {
 
   @Override
   public Parent render() {
+    VBox layout = new VBox();
     GridPane grid = new GridPane();
-    grid.setPrefHeight(controller.getActivePuzzle().getWidth());
-    grid.setPrefWidth(controller.getActivePuzzle().getHeight());
+    layout.getChildren().add(grid);
+    //    grid.setPrefHeight(controller.getActivePuzzle().getWidth());
+    //    grid.setPrefWidth(controller.getActivePuzzle().getHeight());
 
-    for (int x = 0; x < controller.getActivePuzzle().getWidth(); x++) {
-      for (int y = 0; y < controller.getActivePuzzle().getHeight(); y++) {
+    for (int x = 0; x < controller.getActivePuzzle().getHeight(); x++) {
+      for (int y = 0; y < controller.getActivePuzzle().getWidth(); y++) {
         // Wall
         if (controller.getActivePuzzle().getCellType(x, y) == CellType.WALL) {
-          Rectangle wall = new Rectangle(85, 85);
+          Rectangle wall = new Rectangle(60, 60);
           wall.setFill(Color.BLACK);
           grid.add(wall, x, y);
         }
@@ -42,25 +46,27 @@ public class PuzzleView implements FXComponent {
         // Corridor
         if (controller.getActivePuzzle().getCellType(x, y) == CellType.CORRIDOR) {
           Button corridor = new Button();
-          corridor.setPrefSize(85, 85);
+          corridor.setPrefSize(60, 60);
           corridor.setStyle("-fx-background-radius: 0; -fx-border-color: gray;");
           grid.add(corridor, x, y);
 
           int finalX = x;
           int finalY = y;
-          corridor.setOnAction((ActionEvent a) -> controller.clickCell(finalX, finalY));
+          corridor.setOnAction((ActionEvent a) -> controller.getModel().addLamp(finalX, finalY));
 
           if (controller.isLit(x, y)) {
-            corridor.setStyle("-fx-background-color: #ffffe0");
+            corridor.setStyle("-fx-background-color: #FFFF00; -fx-border-color: gray;");
           }
           if (controller.isLamp(x, y)) {
-            Circle lamp = new Circle(50);
-            lamp.setFill(Color.YELLOW);
-            lamp.setStroke(Color.BLACK);
-            lamp.setStrokeWidth(5);
-            corridor.setGraphic(lamp);
+            Image lightBulb = new Image("light-bulb.png");
+            ImageView imageView = new ImageView(lightBulb);
+            imageView.setFitHeight(40);
+            imageView.setFitWidth(40);
+            corridor.setGraphic(imageView);
+            corridor.setOnAction(
+                (ActionEvent a) -> controller.getModel().removeLamp(finalX, finalY));
             if (controller.getModel().isLampIllegal(x, y)) {
-              corridor.setStyle("-fx-background-color: #FF0000");
+              corridor.setStyle("-fx-background-color: #FF0000; -fx-border-color: gray;");
             }
           }
         }
@@ -87,7 +93,7 @@ public class PuzzleView implements FXComponent {
           }
 
           StackPane pane = new StackPane();
-          Rectangle clueBox = new Rectangle(85, 85);
+          Rectangle clueBox = new Rectangle(60, 60);
           Text clueLabel = new Text(clueString);
           clueLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 40));
 
@@ -105,7 +111,13 @@ public class PuzzleView implements FXComponent {
         }
       }
     }
+    // Puzzle Index
+    Text index = new Text("Puzzle " + (controller.getModel().getActivePuzzleIndex() + 1) + " of 5");
+    index.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
+    layout.getChildren().add(index);
+
     grid.setAlignment(Pos.CENTER);
-    return grid;
+    layout.setAlignment(Pos.CENTER);
+    return layout;
   }
 }
